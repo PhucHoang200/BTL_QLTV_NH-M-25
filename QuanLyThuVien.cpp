@@ -1,9 +1,9 @@
 // Thành viên:
-// Vo Thanh Hoang Phuc-6351071056
-// Nguyen Xuan Khanh-6351071033
+// Vo Thanh Hoang Phuc_6351071056
+// Nguyen Xuan Khanh_6351071033
 #include <iostream>
 #include <cstring>
-#include <iomanip> 
+#include <iomanip>
 #include<cstdlib>
 #include<ctime>
 using namespace std;
@@ -25,7 +25,7 @@ public:
     int namXuatBan;
     float giaSach;
     bool daMuon;
-    Sach* next; 
+    Sach* next;
 };
 
 class DocGia
@@ -36,7 +36,7 @@ public:
     string ngaySinh;
     string gioiTinh;
     string diaChi;
-    DocGia* next; 
+    DocGia* next;
 };
 
 class PhieuMuon
@@ -90,10 +90,25 @@ void themDocGia(DocGia*& head)
     getline(cin, newDocGia->gioiTinh);
     cout << "Dia chi: ";
     getline(cin, newDocGia->diaChi);
-    newDocGia->next = head; // Thêm vào d?u danh sách
-    head = newDocGia;
+    newDocGia->next = nullptr; // Kh?i t?o con tr? next c?a newDocGia là nullptr
+
+    if (head == nullptr) // N?u danh sách r?ng, thêm vào d?u danh sách
+    {
+        head = newDocGia;
+    }
+    else
+    {
+        DocGia* temp = head;
+        while (temp->next != nullptr)
+        {
+            temp = temp->next;
+        }
+        temp->next = newDocGia; // Thêm vào cu?i danh sách
+    }
+
     cout << "Them doc gia thanh cong." << endl;
 }
+
 
 // Ham chinh sua thong tin doc gia
 void chinhSuaDocGia(DocGia* head)
@@ -176,10 +191,10 @@ void timKiemDocGiaTheoCCCD(DocGia* head)
         {
            cout << "-------------------------------DANH SACH DOC GIA TRONG THU VIEN--------------------------------\n\n" << endl;
     cout << "+--------------------+------------+---------------+------------+----------------+\n";
-      cout << "| " << left << setw(19) << "Ho ten " << "|" 
-             << setw(12) << "CCCD " << "|" 
-             << setw(15) << "Ngay sinh " << "|" 
-             << setw(12) << "Gioi tinh " << "|" 
+      cout << "| " << left << setw(19) << "Ho ten " << "|"
+             << setw(12) << "CCCD " << "|"
+             << setw(15) << "Ngay sinh " << "|"
+             << setw(12) << "Gioi tinh " << "|"
              << setw(16) << "Dia chi " << "|\n";
     cout << "+--------------------+------------+---------------+------------+----------------+\n";
     cout << "| " << left << setw(19) << node->hoTen << "|"
@@ -189,10 +204,10 @@ void timKiemDocGiaTheoCCCD(DocGia* head)
              << setw(16) << node->diaChi << "|\n";
     cout << "+--------------------+------------+---------------+------------+----------------+\n";
     }
-    
+
         node = node->next;
 
-    
+
 }
 }
 // Ham tim kiem doc gia theo ten
@@ -210,10 +225,10 @@ void timKiemDocGiaTheoTen(DocGia* head)
         {
            cout << "-------------------------------DANH SACH DOC GIA TRONG THU VIEN--------------------------------\n\n" << endl;
     cout << "+--------------------+------------+---------------+------------+----------------+\n";
-      cout << "| " << left << setw(19) << "Ho ten " << "|" 
-             << setw(12) << "CCCD " << "|" 
-             << setw(15) << "Ngay sinh " << "|" 
-             << setw(12) << "Gioi tinh " << "|" 
+      cout << "| " << left << setw(19) << "Ho ten " << "|"
+             << setw(12) << "CCCD " << "|"
+             << setw(15) << "Ngay sinh " << "|"
+             << setw(12) << "Gioi tinh " << "|"
              << setw(16) << "Dia chi " << "|\n";
     cout << "+--------------------+------------+---------------+------------+----------------+\n";
     cout << "| " << left << setw(19) << node->hoTen << "|"
@@ -225,16 +240,15 @@ void timKiemDocGiaTheoTen(DocGia* head)
         }
        node = node->next;
     }
-     
+
 }
 // Ham sap xep sach theo gia tien
-void sapXepSachTheoGia(Sach*& head)
-{
+void bubbleSort(Sach*& head) {
     if (head == nullptr || head->next == nullptr)
         return;
 
-    Sach* node = head;
     int n = 0;
+    Sach* node = head;
     while (node != NULL) {
         n++;
         node = node->next;
@@ -261,9 +275,8 @@ void sapXepSachTheoGia(Sach*& head)
             node = node->next;
         }
     }
-    node = node->next;
-
 }
+
 // Ham in danh sach sach
 void inDanhSachSach(Sach* head)
 {
@@ -305,8 +318,21 @@ void themSach(Sach*& head)
     cin >> newSach->namXuatBan;
     cout << "Gia sach: ";
     cin >> newSach->giaSach;
-    newSach->next = head; // Thêm vào d?u danh sách
-    head = newSach;
+    newSach->next = nullptr;
+
+    if (head == nullptr) // N?u danh sách r?ng, thêm vào d?u danh sách
+    {
+        head = newSach;
+    }
+    else
+    {
+        Sach* temp = head;
+        while (temp->next != nullptr)
+        {
+            temp = temp->next;
+        }
+        temp->next = newSach; // Thêm vào cu?i danh sách
+    }
     cout << "Them sach thanh cong." << endl;
 }
 // Ham kiem tra cccd co hop le hay khong
